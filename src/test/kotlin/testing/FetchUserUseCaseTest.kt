@@ -38,6 +38,7 @@ class FetchUserUseCaseTest {
 
     @Test
     fun `should return expected user in parallel using not using the test dispatcher provider`() = runTest {
+        //val testDispatcher = coroutineContext[ContinuationInterceptor] as CoroutineDispatcher
         val repo: UserDataRepository = FakeUserDataRepository(1000)
         val useCase = FetchUserUseCase(repo)
 
