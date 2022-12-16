@@ -21,9 +21,6 @@ fun main() {
                 }
                 log("Answer is: $answer")
             }
-            launch {
-                log("launch completed")
-            }
         }
     }
     log("Time elapsed: $time")

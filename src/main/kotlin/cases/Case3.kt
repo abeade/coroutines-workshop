@@ -16,9 +16,6 @@ fun main() {
                 val answer = ExternalCompletion().compute()
                 log("Answer is: $answer")
             }
-            launch {
-                log("launch completed")
-            }
         }
     }
     log("Time elapsed: $time")

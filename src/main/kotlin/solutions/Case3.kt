@@ -17,9 +17,6 @@ fun main() {
                 val answer = ExternalCompletion().computeAsync().await()
                 log("Answer is: $answer")
             }
-            launch {
-                log("launch completed")
-            }
         }
     }
     log("Time elapsed: $time")
