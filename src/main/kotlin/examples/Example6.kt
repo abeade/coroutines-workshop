@@ -10,7 +10,7 @@ import kotlin.Exception
  * - Cancellations is cooperative, the code has to cooperate to be cancellable. Suspending functions are cancellable
  * - Check the code is not cancelled properly
  * - Fix 1: Use yield inside the loop
- * - Fix2: Us isActive in the loop condition
+ * - Fix 2: Us isActive in the loop condition
  */
 
 fun main() {

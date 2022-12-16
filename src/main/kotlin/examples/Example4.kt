@@ -9,7 +9,7 @@ import kotlin.time.measureTime
 /**
  * Example 4 DISPATCHERS 2
  * ---------
- * - Check disptachers IO has 64 threads and Defautl 10 threats per M1 CPU
+ * - Check dispatchers IO has 64 threads and Default 10 threats per M1 CPU
  * - Check time when using more threads in the loop
  * - Use delay and check how it don't affect again to 11 threads
  */
