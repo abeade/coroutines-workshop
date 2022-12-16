@@ -17,6 +17,9 @@ fun main() {
                 val answer = ExternalCompletion().computeAsync().await()
                 log("Answer is: $answer")
             }
+            launch {
+                log("Other coroutine started")
+            }
         }
     }
     log("Time elapsed: $time")

@@ -21,6 +21,9 @@ fun main() {
                 }
                 log("Answer is: $answer")
             }
+            launch {
+                log("Other coroutine started")
+            }
         }
     }
     log("Time elapsed: $time")

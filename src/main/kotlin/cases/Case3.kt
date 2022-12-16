@@ -16,6 +16,9 @@ fun main() {
                 val answer = ExternalCompletion().compute()
                 log("Answer is: $answer")
             }
+            launch {
+                log("Other coroutine started")
+            }
         }
     }
     log("Time elapsed: $time")
