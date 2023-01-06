@@ -11,10 +11,12 @@ import kotlinx.coroutines.test.currentTime
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.doSuspendableAnswer
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.mockito.kotlin.willReturn
 import utils.TestCoroutineDispatchersProvider
 
@@ -89,7 +91,7 @@ class FetchUserUseCaseTest {
     }
 
     @Test
-    fun `should return expected user parallel mock`() = runTest {
+    fun `should return expected user parallel mock with mockk`() = runTest {
         val repo: UserDataRepository = mockk()
         coEvery { repo.getName() } coAnswers {
             delay(2000)
@@ -103,7 +105,35 @@ class FetchUserUseCaseTest {
             delay(2000)
             "NotSigned"
         }
-        val useCase = FetchUserUseCase(repo)
+        val useCase = FetchUserUseCase(repo, TestCoroutineDispatchersProvider)
+
+        val result = useCase.fetchUserDataParallel()
+
+        val expectedUser = User(
+            name = "AnyName",
+            assets = listOf("AnyAsset"),
+            status = "NotSigned"
+        )
+        assertEquals(expectedUser, result)
+        assertEquals(2000, currentTime)
+    }
+
+    @Test
+    fun `should return expected user parallel mock with mockito`() = runTest {
+        val repo: UserDataRepository = mock()
+        whenever(repo.getName()).doSuspendableAnswer {
+            delay(2000)
+            "AnyName"
+        }
+        whenever(repo.getAssets()).doSuspendableAnswer {
+            delay(2000)
+            listOf("AnyAsset")
+        }
+        whenever( repo.getStatus()).doSuspendableAnswer {
+            delay(2000)
+            "NotSigned"
+        }
+        val useCase = FetchUserUseCase(repo, TestCoroutineDispatchersProvider)
 
         val result = useCase.fetchUserDataParallel()
 
